@@ -1,5 +1,6 @@
-default:
+nyc_parking_violations:
   outputs:
     dev:
       type: duckdb
-    taget: dev
+      path: nyc.duckdb
+  target: dev
