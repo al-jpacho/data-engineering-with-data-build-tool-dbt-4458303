@@ -1,4 +1,4 @@
-select violation_code,
+select violation_code
   ,  count(summons_number) as ticket_count
   ,  SUM(fee_usd) as total_revenue_usd
 from {{ref('silver_violation_tickets')}}
