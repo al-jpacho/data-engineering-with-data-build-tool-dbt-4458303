@@ -10,7 +10,7 @@ all_other_violation_codes as (
     , definition
     , FALSE as manhattan_96th_st_below,
     , all_other_areas as fee_usd
-  from {{ref('bronze_parkign_violation_codes')}}
+  from {{ref('bronze_parking_violation_codes')}}
 )
 select * from manhattan_violation_codes
 union all 
