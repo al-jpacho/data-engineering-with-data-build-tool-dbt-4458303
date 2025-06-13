@@ -1,18 +1,24 @@
-with manhattan_violation_codes as (
-  select violation_code
-    , definition
-    , TRUE as is_manhattan_96th_st_below
-    , manhattan_96th_st_below as fee_usd
-  from {{ref('bronze_parking_violation_codes')}}
-), 
-all_other_violation_codes as (
-  select violation_code
-    , definition
-    , FALSE as manhattan_96th_st_below,
-    , all_other_areas as fee_usd
-  from {{ref('bronze_parkign_violation_codes')}}
-)
-select * from manhattan_violation_codes
-union all 
-select * from all_other_violation_codes
-order by violation_code asc
+select summons_number,
+  registration_state,
+  plate_type,
+  issue_date,
+  violation_code,
+  vehicle_body_type,
+  vehicle_make,
+  issuing_agency,
+  vehicle_expiration_date,
+  violation_location,
+  violation_precinct,
+  issuer_precinct,
+  issuer_code,
+  issuer_command,
+  issuer_squad,
+  violation_time,
+  violation_county,
+  violation_legal_code,
+  vehicle_color,
+  vehicle_year,
+  case when violation_county == 'MN' then TRUE
+    else FALSE
+    end as is_manhattan_96th_st_below
+FROM {{ref('bronze_parking_violations')}}
